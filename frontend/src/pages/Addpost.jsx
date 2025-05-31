@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 const AddPost = () => {
   const [userInput, setUserInput] = useState("");
@@ -7,6 +8,7 @@ const AddPost = () => {
   const [loading, setLoading] = useState(false);
   const [topic, setTopic] = useState("Politics");
   const [toast, setToast] = useState({ message: "", type: "", visible: false });
+  const nav = useNavigate();
 
   const showToast = (message, type = "info", duration = 3500) => {
     setToast({ message, type, visible: true });
@@ -93,9 +95,7 @@ const AddPost = () => {
       );
       if (response.status === 200 || response.status === 201) {
         showToast("Post submitted successfully!", "success");
-        setTopic("Politics");
-        setOriginalText("");
-        setTransformedText("");
+        nav(`/topic/${encodeURIComponent(topic)}`);
       } else {
         throw new Error("Failed to submit the post.");
       }
@@ -148,7 +148,7 @@ const AddPost = () => {
         <button
           onClick={handlePacify}
           disabled={loading}
-          className="w-full bg-[#F04E23] text-lg font-bold text-white p-3 rounded-sm"
+          className="w-full bg-[#F04E23] hover:bg-[#f02323] cursor-pointer text-lg font-bold text-white p-3 rounded-sm"
         >
           {loading ? "Transforming..." : "Make it Peaceful!!"}
         </button>
@@ -184,12 +184,13 @@ const AddPost = () => {
       )}
 
       <div className="button-box flex gap-5 mt-3 ">
-        <button className="bg-[#D9D9D9] py-5 px-7 rounded-sm font-bold ">
+        <button onClick={() => nav("/homepage")} 
+        className="bg-[#D9D9D9] hover:bg-gray-400 py-5 px-7 rounded-sm font-bold cursor-pointer">
           CANCEL
         </button>
         <button
           onClick={handlePost}
-          className="bg-[#FEC232] py-5 px-7 rounded-sm font-bold "
+          className="bg-[#FEC232] hover:bg-[#fe8a32] py-5 px-7 rounded-sm font-bold cursor-pointer"
         >
           POST
         </button>
