@@ -31,7 +31,6 @@ function Login() {
                 IsLoginFailText(true);
             }
         } catch (error) {
-            alert("Network error: " + error.message);
             IsLoginFailText(true);
         }
     };
