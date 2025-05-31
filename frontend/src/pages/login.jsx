@@ -5,7 +5,7 @@ function Login() {
     const nav = useNavigate();
     return (
         <div className="min-h-screen bg-[#2D3138] flex items-center justify-center px-4">
-            <div className="relative text-white p-8 rounded-md w-full max-w-md text-center">
+            <div className=" text-white p-8 rounded-md w-full max-w-xl text-center ">
 
                 <img src={logo} className=""/>
                 <p className="text-sm lg:text-lg font-bold text-[#F04E23] my-6">Say What You Mean—Respectfully</p>
@@ -14,14 +14,14 @@ function Login() {
                         <p className="text-white text-left">Username</p>
                         <input
                             type="text"
-                            className="w-full px-4 py-2 text-black bg-white rounded-3 focus:outline-none"
+                            className="w-full px-4 py-2 text-white bg-black rounded-3 focus:outline-none"
                         />
                     </div>
                     <div>
                         <p className="text-white text-left">Password</p>
                         <input
                             type="password"
-                            className="w-full px-4 py-2 text-black bg-white rounded-3 focus:outline-none"
+                            className="w-full px-4 py-2 text-white bg-black rounded-3 focus:outline-none"
                         />
                     </div>
                     <button
