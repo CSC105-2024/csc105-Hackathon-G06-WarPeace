@@ -1,7 +1,5 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function NavBar() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -9,24 +7,24 @@ function NavBar() {
 
   const handleProfileClick = () => {
     setDropdownOpen(false);
-    navigate('/myProfile');
+    navigate("/myProfile");
   };
 
   const handleLogoutClick = () => {
     setDropdownOpen(false);
-    localStorage.clear(); 
-    navigate('/');
+    localStorage.clear();
+    navigate("/");
   };
 
   const handlePostClick = () => {
-    navigate('/addpost'); 
+    navigate("/addpost");
   };
 
   return (
     <div className="bg-[#24272D] text-white px-4 md:px-8 py-4 flex justify-between items-center relative shadow-md sticky top-0 z-50">
       <div
         className="flex items-center space-x-3 cursor-pointer"
-        onClick={() => navigate('/homepage')}
+        onClick={() => navigate("/homepage")}
       >
         <img
           src="/homepage/WARPEACE (5).png"
@@ -48,9 +46,7 @@ function NavBar() {
           <div
             className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-full bg-white cursor-pointer"
             onClick={() => setDropdownOpen(!dropdownOpen)}
-          >
-            <FontAwesomeIcon icon={faUser} className="text-[#2D3138] text-lg md:text-xl" />
-          </div>
+          ></div>
           {dropdownOpen && (
             <div className="absolute right-0 top-full mt-2 w-28 md:w-32 bg-white text-black rounded shadow-lg z-50 text-sm">
               <div

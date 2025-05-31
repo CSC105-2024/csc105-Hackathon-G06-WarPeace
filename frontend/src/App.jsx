@@ -3,11 +3,9 @@ import Login from './pages/login'
 import SignUp from './pages/register'
 import { useState } from 'react';
 import HomePage from './pages/HomePage';
-import TopicPage from './pages/TopicPage'; 
 import AddPost from "./pages/Addpost";
 import TestLogin from "./pages/login_test"
 import RegisterTest from "./pages/register_test"
-import AddPost from "./pages/addPost"
 import Test from "./pages/test"
 function App() {
   return (
@@ -17,7 +15,7 @@ function App() {
         <Route path="/loginTest" element={<TestLogin/>} />
         <Route path="/signUp" element={<SignUp />} />
         <Route path="/HomePage" element={<HomePage />} />
-        <Route path="/topic/:category" element={<TopicPage />} />
+        
         <Route path="/addpost" element={<AddPost />} />
         <Route path="/signUpTest" element={<RegisterTest />} />
         <Route path="/addPost" element={<AddPost/>}/>
