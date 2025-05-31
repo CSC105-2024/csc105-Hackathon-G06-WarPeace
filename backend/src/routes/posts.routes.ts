@@ -1,11 +1,12 @@
 import { Hono } from "hono";
 import * as postsController from '../controllers/posts.controller.ts';
 import { authMiddleWare } from "../middleware/auth.middleware.ts";
-export const recipeRouter = new Hono();
-recipeRouter.get('/all',postsController.getAllPosts);
-recipeRouter.use('*', authMiddleWare);
-recipeRouter.get('/', postsController.getMyPosts);
-recipeRouter.post('/addPost', postsController.addPost);
-recipeRouter.post('/addReply', postsController.addReply);
+const postRouter = new Hono();
+postRouter.get('/all',postsController.getAllPosts);
+postRouter.use('*', authMiddleWare);
+postRouter.get('/', postsController.getMyPosts);
+postRouter.post('/addPost', postsController.addPost);
+postRouter.post('/addReply', postsController.addReply);
+export default postRouter;
 
 
