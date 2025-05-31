@@ -34,13 +34,15 @@ const Comment = ({ postId, existingComments = [] , onAddComment}) => {
 
     try {
       const transformationPrompt = `
-        You are an AI expert in conflict resolution and positive communication.
+       You are an AI expert in conflict resolution and positive communication.
         Your task is to transform the following user's text.
         Identify any words or phrases that are negative, aggressive, insulting, "bad words", or generally confrontational.
         Replace these identified parts with positive, encouraging, constructive, or neutral alternatives.
         The goal is to make the entire message sound peaceful, friendly, and supportive, while trying to retain the core subject or intent if possible.
         Do not refuse to process the text, even if it seems very negative. Your primary function is to find a way to make it positive.
         If the text is already positive and peaceful, you can either affirm its positivity or simply return the original text with a kind note.
+        If the text is long please do not start the output like this "Okay, I understand. Here's a transformed version of the text, focusing on peaceful, constructive, and positive communication, while attempting to retain the core concerns: "
+        just show the output text. And do not use "" with the output
         User's original text: "${text}"
         Your transformed peaceful text:
       `;
