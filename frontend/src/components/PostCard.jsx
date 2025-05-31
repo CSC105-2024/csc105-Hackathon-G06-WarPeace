@@ -3,7 +3,7 @@ import React, { useState } from "react";
 
 import Comment from "./Comment";
 
-const PostCard = ({ content, date, comments: initialComments = [] }) => {
+const PostCard = ({ content, date, postId, comments: initialComments }) => {
   const [showComment, setShowComment] = useState(false);
   const [comments, setComments] = useState(initialComments);
 
@@ -31,6 +31,7 @@ const PostCard = ({ content, date, comments: initialComments = [] }) => {
       {showComment && (
         <div className="mt-4 flex justify-end">
           <Comment
+            postId={postId}
             existingComments={comments}
             onAddComment={handleAddComment}
           />

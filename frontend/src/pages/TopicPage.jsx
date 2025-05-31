@@ -95,7 +95,8 @@ const TopicPage = () => {
               key={post.id}
               content={post.text}
               date={formatDate(post.createdAt)}
-              comments={post.comments || []}
+              postId = {post.id}
+              comments={post.reply || []}
             />
           ))}
 

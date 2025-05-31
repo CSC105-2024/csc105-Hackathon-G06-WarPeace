@@ -57,6 +57,7 @@ export const getAllPosts = async ()=>{
     const allPost = await db.post.findMany({
         include:{
             user:true,
+            reply:true
         },
         orderBy:{
             createdAt:"desc"
