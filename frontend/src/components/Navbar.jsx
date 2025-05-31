@@ -14,12 +14,12 @@ function NavBar() {
 
   const handleLogoutClick = () => {
     setDropdownOpen(false);
-    localStorage.clear();
+    localStorage.clear(); 
     navigate('/');
   };
 
   const handlePostClick = () => {
-    navigate('/addpost');
+    navigate('/addpost'); 
   };
 
   return (
@@ -32,7 +32,6 @@ function NavBar() {
           src="/homepage/WARPEACE (5).png"
           alt="Logo"
           className="h-[60px] w-auto object-contain"
-
         />
       </div>
 
@@ -52,7 +51,6 @@ function NavBar() {
           >
             <FontAwesomeIcon icon={faUser} className="text-[#2D3138] text-lg md:text-xl" />
           </div>
-
           {dropdownOpen && (
             <div className="absolute right-0 top-full mt-2 w-28 md:w-32 bg-white text-black rounded shadow-lg z-50 text-sm">
               <div
