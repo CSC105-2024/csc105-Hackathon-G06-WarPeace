@@ -1,10 +1,8 @@
 import React from 'react';
 import NavBar from '../components/Navbar';
-import { FaExclamationCircle, FaArrowRight } from 'react-icons/fa';
+import { FaExclamationCircle } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-
-
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -19,7 +17,6 @@ const HomePage = () => {
       <NavBar />
 
       <div className="min-h-screen bg-[#2D3138] text-white flex flex-col items-center py-10 px-4">
-        {/* Rules Box */}
         <div className="bg-[#1E2023] w-full max-w-xl rounded px-6 py-4 mb-10 flex space-x-4 items-start shadow-md">
           <FaExclamationCircle className="text-red-500 text-xl mt-1" />
           <div className="text-sm md:text-base">
@@ -32,19 +29,17 @@ const HomePage = () => {
           </div>
         </div>
 
-        {/* Category Buttons */}
         <div className="space-y-4 w-full max-w-md">
           {categories.map((cat) => (
-  <Link
-    key={cat}
-    to={`/topic/${cat.toLowerCase()}`}
-    className="w-full flex justify-between items-center bg-gray-600 hover:bg-gray-500 text-white font-semibold px-5 py-3 rounded transition"
-  >
-    <span>{cat}</span>
-    <FaArrowRight />
-  </Link>
-))}
-          
+            <Link
+              key={cat}
+              to={`/topic/${cat.toLowerCase()}`}
+              className="w-full flex justify-between items-center bg-gray-600 hover:bg-gray-500 text-white font-semibold px-5 py-3 rounded transition"
+            >
+              <span>{cat}</span>
+              <img src="/homepage/right.svg" alt="arrow" className="w-4 h-4" />
+            </Link>
+          ))}
         </div>
       </div>
     </>

@@ -1,5 +1,4 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
+
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -29,7 +28,7 @@ function NavBar() {
         onClick={() => navigate('/homepage')}
       >
         <img
-          src="/homepage/WARPEACE (5).png"
+          src="/homepage/WARPEACE.png"
           alt="Logo"
           className="h-[60px] w-auto object-contain"
         />
@@ -46,10 +45,14 @@ function NavBar() {
 
         <div className="relative">
           <div
-            className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-full bg-white cursor-pointer"
+            className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-full  cursor-pointer overflow-hidden"
             onClick={() => setDropdownOpen(!dropdownOpen)}
           >
-            <FontAwesomeIcon icon={faUser} className="text-[#2D3138] text-lg md:text-xl" />
+            <img
+              src="/homepage/user.svg"
+              alt="Profile"
+              className="w-full h-full object-cover rounded-full"
+            />
           </div>
           {dropdownOpen && (
             <div className="absolute right-0 top-full mt-2 w-28 md:w-32 bg-white text-black rounded shadow-lg z-50 text-sm">
@@ -74,3 +77,4 @@ function NavBar() {
 }
 
 export default NavBar;
+
