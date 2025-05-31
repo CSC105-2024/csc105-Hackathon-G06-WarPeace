@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const PostHistory = () => {
   const [mypost, setmypost] = useState([]);
@@ -32,7 +33,12 @@ const PostHistory = () => {
     <>
       <Navbar />
       <div className="bg-[#2D3138] pt-30  min-h-screen text-white px-8 py-12">
-        <h1 className="text-3xl font-bold text-center mb-10">HISTORY POSTS</h1>
+        <div className="text-box text-center text-3xl   px-20 mb-10 flex flex-row items-center gap-2">
+          <Link to={"/myProfile"} className="text-gray-200 hover:underline">
+            User Profile /
+          </Link>
+          <h1 className="font-bold">HISTORY POSTS</h1>
+        </div>
         {mypost.map((post, index) => (
           <div
             key={index}
