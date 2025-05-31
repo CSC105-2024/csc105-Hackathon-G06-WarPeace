@@ -37,7 +37,7 @@ const HomePage = () => {
           {categories.map((cat) => (
             <Link
               key={cat}
-              to={`/topic/${cat.toLowerCase()}`}
+              to={`/topic/${cat}`}
               className="w-full flex justify-between items-center bg-gray-600 hover:bg-gray-500 text-white font-semibold px-5 py-3 rounded transition"
             >
               <span>{cat}</span>

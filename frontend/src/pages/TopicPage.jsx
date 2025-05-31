@@ -6,26 +6,26 @@ import Navbar from "../components/Navbar";
 import PostCard from "../components/PostCard";
 
 const topicInfo = {
-  politics: {
+  Politics: {
     title: "Politics",
     description:
       "Discuss government, policies, political events, and global affairs.",
   },
-  academics: {
+  Academics: {
     title: "Academics",
     description:
       "Talk about studies, exams, school life, and anything educational.",
   },
-  media: {
+  Media: {
     title: "Media",
     description: "Discuss movies, music, games, celebrities, and media trends.",
   },
-  relationship: {
+  Relationship: {
     title: "Relationship",
     description:
       "Share and seek advice on friendships, love, family, and more.",
   },
-  other: {
+  Other: {
     title: "Other",
     description: "Topics that don’t fit in the main categories.",
   },

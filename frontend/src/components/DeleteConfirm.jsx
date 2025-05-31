@@ -8,14 +8,17 @@ function DeleteConfirm({ onCancel }) {
 
   const handleDeleteAccount = async () => {
     try {
-      const res = await axios.delete("http://localhost:3000/auth/deleteAccount", {
-        withCredentials: true,
-      });
+      const res = await axios.delete(
+        "http://localhost:3000/auth/deleteAccount",
+        {
+          withCredentials: true,
+        }
+      );
 
       if (res.data.success) {
         localStorage.removeItem("userId");
         alert("Account deleted successfully.");
-        navigate("/"); 
+        navigate("/");
       } else {
         alert(res.data.msg || "Failed to delete account.");
       }
@@ -27,13 +30,18 @@ function DeleteConfirm({ onCancel }) {
 
   return (
     <div className="fixed inset-0 bg-black/40 bg-opacity-10 flex items-center justify-center z-50">
-      <div className="bg-[#202327] border border-stone-700 text-white rounded-[3px] p-6 w-full max-w-sm shadow-lg">
-        <h2 className="text-xl font-semibold mb-4">Confirm Deletion</h2>
+      <div className="bg-[#202327]  flex flex-col justify-center border border-stone-700 text-white rounded-[3px] p-6 w-full max-w-sm shadow-lg">
+        <h2 className="text-xl font-semibold mb-4 text-center">
+          Confirm Deletion
+        </h2>
         <div className="justify-center flex m-5">
           <img src={omgDelete} alt="Delete Confirm" className="h-50 w-50" />
         </div>
-        <p className="mb-6">Are you sure you want to delete your account? This action cannot be undone.</p>
-        <div className="flex justify-end space-x-4">
+        <p className="mb-6 text-center">
+          Are you sure you want to delete your account? This action cannot be
+          undone.
+        </p>
+        <div className="flex justify-center space-x-4 ">
           <button
             onClick={onCancel}
             className="bg-[#F04E23] hover:bg-[#f03823] cursor-pointer px-4 py-2 rounded-[3px]"

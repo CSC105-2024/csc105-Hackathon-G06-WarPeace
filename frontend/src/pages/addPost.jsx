@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 const AddPost = () => {
   const [userInput, setUserInput] = useState("");
@@ -7,7 +8,7 @@ const AddPost = () => {
   const [loading, setLoading] = useState(false);
   const [topic, setTopic] = useState("Politics");
   const [toast, setToast] = useState({ message: "", type: "", visible: false });
-
+  const nav = useNavigate();
   const showToast = (message, type = "info", duration = 3500) => {
     setToast({ message, type, visible: true });
     setTimeout(() => {
@@ -98,6 +99,7 @@ const AddPost = () => {
         setTopic("Politics");
         setOriginalText("");
         setTransformedText("");
+        nav(`/topic/${topic}`)
       } else {
         throw new Error("Failed to submit the post.");
       }
@@ -188,7 +190,9 @@ const AddPost = () => {
       )}
 
       <div className="button-box flex gap-5 mt-3 ">
-        <button className="bg-[#D9D9D9] hover:bg-[#d9d9d9f2] py-5 px-7 rounded-sm font-bold ">
+        <button 
+        onClick={()=>nav('/HomePage')}
+        className="bg-[#D9D9D9] hover:bg-[#d9d9d9f2] py-5 px-7 rounded-sm font-bold ">
           CANCEL
         </button>
         <button
