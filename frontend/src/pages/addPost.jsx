@@ -1,13 +1,14 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function AddPost() {
-  const [topic, setTopic] = useState("");
+  const [topic, setTopic] = useState("Politics");
   const [userInput, setUserInput] = useState("");
   const [originalText, setOriginalText] = useState("");
   const [transformedText, setTransformedText] = useState("");
   const [loading, setLoading] = useState(false);
   const [toast, setToast] = useState({ message: "", type: "", visible: false });
+  const userId = parseInt(localStorage.getItem("userId"));
   const showToast = (message, type = "info", duration = 3500) => {
     setToast({ message, type, visible: true });
     setTimeout(() => {
@@ -61,71 +62,28 @@ function AddPost() {
       setLoading(false);
     }
   };
-
+  const handleSubmit = async ()=>{
+    try{
+        setLoading(true);
+        await axios.post("http://localhost:3000/post/addPost",{
+            userId,
+            topic,
+            text:transformedText
+        },{
+            withCredentials:true
+        })
+        setUserInput("");
+        setOriginalText("");
+        setTransformedText("");
+        setTopic("")
+    }catch(error){
+        console.error("Error saving post:", error);
+    showToast("Failed to save post.", "error");
+    }finally{
+        setLoading(false);
+    }
+  }
   return (
-    /**
-     * <div className="min-h-screen flex flex-col items-center justify-center p-4 pt-8">
-      <div className="bg-white p-8 md:p-12 rounded-xl shadow-2xl w-full max-w-3xl">
-        <header className="text-center mb-10">
-          <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 pb-2">
-            Peaceful Word Wars
-          </h1>
-          <p className="text-gray-600 text-lg">Transform fiery words into friendly vibes!</p>
-        </header>
-
-        <div className="mb-8">
-          <label htmlFor="userInput" className="block text-sm font-medium text-gray-700 mb-2">
-            Your Message:
-          </label>
-          <textarea
-            id="userInput"
-            rows="5"
-            className="w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition duration-150 text-gray-700"
-            placeholder="Unleash your words (the AI will make them kind)..."
-            value={userInput}
-            onChange={(e) => setUserInput(e.target.value)}
-          ></textarea>
-        </div>
-
-        <button
-          onClick={handleTransform}
-          disabled={loading}
-          className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold py-3.5 px-4 rounded-lg shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-75 transition duration-150 ease-in-out text-lg"
-        >
-          {loading ? 'Transforming...' : 'Make it Peaceful!'}
-        </button>
-
-        {loading && <div className="loader mt-8"></div>}
-
-        <div className="mt-10 space-y-8">
-          <div className="message-card">
-            <h2 className="message-title">Original Message:</h2>
-            <p className="message-content">{originalText}</p>
-          </div>
-          <div className="message-card">
-            <h2 className="message-title">Peaceful Transformation:</h2>
-            <p className="message-content transformed">{transformedText}</p>
-          </div>
-        </div>
-      </div>
-
-      {toast.visible && (
-        <div className={`toast ${toast.type} show`}>
-          {toast.message}
-        </div>
-      )}
-
-      
-      
-
-
-      <footer className="text-center text-gray-500 mt-12 pb-6">
-        <p>Powered by Generative AI</p>
-      </footer>
-    </div>
-     * 
-     * 
-     */
     <div className="pageCon min-h-screen">
       <div className="bodyCon">
         <h1>WHAT’S IN YOUR MIND?</h1>
@@ -170,7 +128,7 @@ function AddPost() {
         )}
         <div className="btn-area flex gap-2">
           <button className="bg-[#D9D9D9]">CANCEL</button>
-          <button className="bg-[#FEC232]">POST</button>
+          <button className="bg-[#FEC232]" onClick={handleSubmit }>POST</button>
         </div>
       </div>
     </div>

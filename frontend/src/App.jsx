@@ -4,6 +4,7 @@ import SignUp from './pages/register'
 import TestLogin from "./pages/login_test"
 import RegisterTest from "./pages/register_test"
 import AddPost from "./pages/addPost"
+import Test from "./pages/test"
 function App() {
   return (
     <BrowserRouter>
@@ -13,6 +14,7 @@ function App() {
         <Route path="/signUp" element={<SignUp />} />
         <Route path="/signUpTest" element={<RegisterTest />} />
         <Route path="/addPost" element={<AddPost/>}/>
+        <Route path="/test" element={<Test/>}/>
       </Routes>
     </BrowserRouter>
   )
