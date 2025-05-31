@@ -1,137 +1,140 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
-function AddPost() {
-  const [topic, setTopic] = useState("Politics");
-  const [userInput, setUserInput] = useState("");
-  const [originalText, setOriginalText] = useState("");
-  const [transformedText, setTransformedText] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [toast, setToast] = useState({ message: "", type: "", visible: false });
-  const userId = parseInt(localStorage.getItem("userId"));
-  const showToast = (message, type = "info", duration = 3500) => {
-    setToast({ message, type, visible: true });
+const filterTextWithAI = async (text) => {
+  return new Promise((resolve) => {
     setTimeout(() => {
-      setToast({ ...toast, visible: false });
-    }, duration);
+      const cleaned = text.replace(/badword/gi, 'softword');
+      resolve(cleaned);
+    }, 1000);
+  });
+};
+
+const AddPost = () => {
+  const navigate = useNavigate();
+  const [selectedTopic, setSelectedTopic] = useState('');
+  const [rawText, setRawText] = useState('');
+  const [peacefulText, setPeacefulText] = useState('');
+  const [isProcessing, setIsProcessing] = useState(false);
+
+  const handleMakePeaceful = async () => {
+    if (!rawText.trim()) return;
+    setIsProcessing(true);
+    const filtered = await filterTextWithAI(rawText);
+    setPeacefulText(filtered);
+    setIsProcessing(false);
   };
-  const handleTransform = async () => {
-    const text = userInput.trim();
-    if (!text) {
-      showToast("Please enter a message");
-      return;
-    }
-    setLoading(true);
-    setOriginalText(text);
-    setTransformedText("Thinking peaceful thoughts...");
+
+  const handlePost = async () => {
+    if (!selectedTopic || !peacefulText.trim()) return;
+
+    const newPost = {
+      content: peacefulText,
+      category: selectedTopic,
+      date: new Date().toLocaleString(),
+      comments: [],
+    };
+
     try {
-      const transformationPrompt = `
-        You are an AI expert in conflict resolution and positive communication.
-        Your task is to transform the following user's text.
-        Identify any words or phrases that are negative, aggressive, insulting, "bad words", or generally confrontational.
-        Replace these identified parts with positive, encouraging, constructive, or neutral alternatives.
-        The goal is to make the entire message sound peaceful, friendly, and supportive, while trying to retain the core subject or intent if possible.
-        Do not refuse to process the text, even if it seems very negative. Your primary function is to find a way to make it positive.
-        If the text is already positive and peaceful, you can either affirm its positivity or simply return the original text with a kind note.
-        User's original text: "${text}"
-        Your transformed peaceful text:
-      `;
-      const payload = {
-        contents: [{ role: "user", parts: [{ text: transformationPrompt }] }],
-      };
-      const apiKey = "AIzaSyBllPBXQcJpcyuaeqPEaUIjDBIf6Oc-T9A";
-      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
-      const response = await axios.post(apiUrl, payload, {
-        headers: { "Content-Type": "application/json" },
+      const res = await fetch('/post/addPost', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newPost),
       });
-      const result = response.data;
-      const transformed =
-        result?.candidates?.[0]?.content?.parts?.[0]?.text?.trim();
-      if (transformed) {
-        setTransformedText(transformed);
-        showToast("Message transformed successfully!");
-      } else {
-        setTransformedText("Could not generate the transformed message");
-        throw new Error("Could not parse transformed text from API response.");
-      }
-    } catch (error) {
-      console.error(error);
-      setTransformedText(`Oops! Something went wrong: ${error.message}`);
-      showToast(`Transformation Error: ${error.message}`, "error");
-    } finally {
-      setLoading(false);
+
+      if (!res.ok) throw new Error('Failed to post');
+
+      navigate(`/topic/${selectedTopic}`);
+    } catch (err) {
+      console.error('Error posting:', err);
+      alert('Failed to post. Please try again.');
     }
   };
-  const handleSubmit = async ()=>{
-    try{
-        setLoading(true);
-        await axios.post("http://localhost:3000/post/addPost",{
-            userId,
-            topic,
-            text:transformedText
-        },{
-            withCredentials:true
-        })
-        setUserInput("");
-        setOriginalText("");
-        setTransformedText("");
-        setTopic("")
-    }catch(error){
-        console.error("Error saving post:", error);
-    showToast("Failed to save post.", "error");
-    }finally{
-        setLoading(false);
-    }
-  }
+
+  const handleCancel = () => {
+    navigate('/HomePage');
+  };
+
   return (
-    <div className="pageCon min-h-screen">
-      <div className="bodyCon">
-        <h1>WHAT’S IN YOUR MIND?</h1>
+    <div className="min-h-screen bg-[#2D3138] text-white px-4 py-20 flex flex-col items-center">
+      <h1 className="text-3xl font-bold mb-8">WHAT’S IN YOUR MIND?</h1>
+
+      <div className="mb-4 w-full max-w-4xl flex items-center gap-4">
+        <label className="font-semibold text-lg min-w-[50px]">Topic:</label>
         <select
-          className="w-[200px] border-1 md:w-[300px] rounded-[10px] px-2 py-2"
-          value={topic}
-          onChange={(e) => setTopic(e.target.value)}
+          className="w-48 p-2 rounded text-black bg-white"
+          value={selectedTopic}
+          onChange={(e) => setSelectedTopic(e.target.value)}
         >
-          <option>Politics</option>
-          <option>Media</option>
-          <option>Relationship</option>
-          <option>Other</option>
+          <option value="">Select</option>
+          <option value="politics">Politics</option>
+          <option value="academics">Academics</option>
+          <option value="entertainment">Entertainment</option>
+          <option value="relationships">Relationships</option>
+          <option value="others">Others</option>
         </select>
+      </div>
+
+      <div className="flex flex-col md:flex-row w-full max-w-4xl gap-6 mb-6">
+        {/* Input Text */}
         <textarea
-          id="userInput"
-          rows="5"
-          className="w-full p-4 border border-gray-300 rounded-sm shadow-sm focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition duration-150 text-gray-700"
-          placeholder="Unleash your words..."
-          value={userInput}
-          onChange={(e) => setUserInput(e.target.value)}
-        ></textarea>
+          className="w-full md:w-1/2 h-64 p-4 bg-white text-black rounded resize-none"
+          placeholder="Write your thoughts here..."
+          value={rawText}
+          onChange={(e) => setRawText(e.target.value)}
+        />
+
+        {/* Mobile: Peaceful Button between textareas */}
         <button
-          onClick={handleTransform}
-          disabled={loading}
-          className="bg-amber-300"
+          onClick={handleMakePeaceful}
+          disabled={isProcessing || !rawText.trim()}
+          className="block md:hidden w-full bg-red-600 text-white py-3 rounded hover:bg-red-500 disabled:opacity-50 font-semibold"
         >
-          {loading ? "Transforming..." : "Make it Peaceful!"}
+          ✨ Make it peaceful !! ✨
         </button>
-        {loading && <div className="loader mt-8"></div>}
-        <div className="resultBox">
-          <div className="messageleft">
-            <h2>Original text:</h2>
-            <p>{originalText}</p>
-          </div>
-          <div className="messageRight">
-            <h2>Peaceful text:</h2>
-            <p>{transformedText}</p>
-          </div>
+
+        {/* Arrow for desktop */}
+        <div className="hidden md:flex items-center justify-center text-3xl">
+          <FontAwesomeIcon icon={faArrowRight} style={{ color: '#ffffff' }} />
         </div>
-        {toast.visible && (
-          <div className={`toast ${toast.type} show`}>{toast.message}</div>
-        )}
-        <div className="btn-area flex gap-2">
-          <button className="bg-[#D9D9D9]">CANCEL</button>
-          <button className="bg-[#FEC232]" onClick={handleSubmit }>POST</button>
-        </div>
+
+        {/* Peaceful Output */}
+        <textarea
+          className="w-full md:w-1/2 h-64 p-4 bg-white text-black rounded resize-none"
+          value={peacefulText}
+          placeholder="Peaceful version will appear here..."
+          readOnly
+        />
+      </div>
+
+      {/* Desktop: Peaceful Button below textareas */}
+      <button
+        onClick={handleMakePeaceful}
+        disabled={isProcessing || !rawText.trim()}
+        className="hidden md:block w-full max-w-xs bg-red-600 text-white py-3 rounded mb-8 hover:bg-red-500 disabled:opacity-50 font-semibold"
+      >
+        ✨ Make it peaceful !! ✨
+      </button>
+
+      <div className="flex justify-center w-full max-w-xs gap-4">
+        <button
+          onClick={handleCancel}
+          className="w-1/2 bg-gray-300 text-black font-bold py-2 rounded hover:bg-gray-400"
+        >
+          CANCEL
+        </button>
+        <button
+          onClick={handlePost}
+          disabled={!selectedTopic || !peacefulText.trim()}
+          className="w-1/2 bg-yellow-400 text-black font-bold py-2 rounded hover:bg-yellow-300 disabled:opacity-50"
+        >
+          POST
+        </button>
       </div>
     </div>
   );
-}
+};
+
 export default AddPost;
