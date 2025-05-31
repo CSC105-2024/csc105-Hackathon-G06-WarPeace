@@ -8,9 +8,9 @@ const HomePage = () => {
   const categories = [
     "Politics",
     "Academics",
-    "Entertainment",
-    "Relationships",
-    "Others",
+    "Media",
+    "Relationship",
+    "Other",
   ];
 
   const handleCategoryClick = (category) => {

@@ -121,6 +121,7 @@ const AddPost = () => {
             className="w-full m-3 md:w-1/2 border-1 bg-white rounded-[10px] px-2 py-2"
           >
             <option>Politics</option>
+            <option>Academics</option>
             <option>Media</option>
             <option>Relationship</option>
             <option>Other</option>

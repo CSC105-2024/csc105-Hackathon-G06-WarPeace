@@ -1,29 +1,33 @@
 //topic.jsx
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import Navbar from '../components/Navbar';
-import PostCard from '../components/PostCard';
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import Navbar from "../components/Navbar";
+import PostCard from "../components/PostCard";
 
 const topicInfo = {
   politics: {
-    title: 'Politics',
-    description: 'Discuss government, policies, political events, and global affairs.',
+    title: "Politics",
+    description:
+      "Discuss government, policies, political events, and global affairs.",
   },
   academics: {
-    title: 'Academics',
-    description: 'Talk about studies, exams, school life, and anything educational.',
+    title: "Academics",
+    description:
+      "Talk about studies, exams, school life, and anything educational.",
   },
-  entertainment: {
-    title: 'Entertainment',
-    description: 'Discuss movies, music, games, celebrities, and media trends.',
+  media: {
+    title: "Media",
+    description: "Discuss movies, music, games, celebrities, and media trends.",
   },
-  relationships: {
-    title: 'Relationships',
-    description: 'Share and seek advice on friendships, love, family, and more.',
+  relationship: {
+    title: "Relationship",
+    description:
+      "Share and seek advice on friendships, love, family, and more.",
   },
-  others: {
-    title: 'Others',
-    description: 'Topics that don’t fit in the main categories.',
+  other: {
+    title: "Other",
+    description: "Topics that don’t fit in the main categories.",
   },
 };
 
@@ -32,32 +36,36 @@ const POSTS_PER_PAGE = 10;
 const TopicPage = () => {
   const { category } = useParams();
   const topic = topicInfo[category] || {
-    title: 'Unknown Topic',
-    description: 'This topic does not exist.',
+    title: "Unknown Topic",
+    description: "This topic does not exist.",
   };
 
   const [allPosts, setAllPosts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const fetchAllPost = async () => {
+    try {
+      const res = await axios.get("http://localhost:3000/post/all", {
+        withCredentials: true,
+      });
+      console.log(res.data.data);
+      setAllPosts(res.data.data);
+    } catch (err) {
+      console.error("Error fetching my post:", err);
+    }
+  };
   useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const res = await fetch('/post/all'); 
-        const data = await res.json();
-        setAllPosts(data);
-      } catch (error) {
-        console.error('Failed to fetch posts:', error);
-      }
-    };
-
-    fetchPosts();
+    fetchAllPost();
   }, []);
   const filteredPosts = allPosts.filter(
-    (post) => post.category?.toLowerCase() === category.toLowerCase()
+    (post) => post.topic?.toLowerCase() === category.toLowerCase()
   );
 
   const totalPages = Math.ceil(filteredPosts.length / POSTS_PER_PAGE);
   const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
-  const currentPosts = filteredPosts.slice(startIndex, startIndex + POSTS_PER_PAGE);
+  const currentPosts = filteredPosts.slice(
+    startIndex,
+    startIndex + POSTS_PER_PAGE
+  );
 
   const handlePrev = () => {
     if (currentPage > 1) setCurrentPage(currentPage - 1);
@@ -79,14 +87,16 @@ const TopicPage = () => {
           {currentPosts.map((post) => (
             <PostCard
               key={post.id}
-              content={post.content}
-              date={post.date}
+              content={post.text}
+              date={post.createdAt}
               comments={post.comments || []}
             />
           ))}
 
           {currentPosts.length === 0 && (
-            <p className="text-gray-400 text-center">No posts available in this category.</p>
+            <p className="text-gray-400 text-center">
+              No posts available in this category.
+            </p>
           )}
         </div>
         {totalPages > 1 && (
@@ -95,7 +105,7 @@ const TopicPage = () => {
               onClick={handlePrev}
               disabled={currentPage === 1}
               className={`text-2xl hover:text-white ${
-                currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''
+                currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""
               }`}
             >
               <FontAwesomeIcon icon={faChevronLeft} />
@@ -107,7 +117,9 @@ const TopicPage = () => {
               onClick={handleNext}
               disabled={currentPage === totalPages}
               className={`text-2xl hover:text-white ${
-                currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''
+                currentPage === totalPages
+                  ? "opacity-50 cursor-not-allowed"
+                  : ""
               }`}
             >
               <FontAwesomeIcon icon={faChevronRight} />
