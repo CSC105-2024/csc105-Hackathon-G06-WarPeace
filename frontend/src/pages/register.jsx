@@ -1,7 +1,7 @@
 function SignUp(){
     return(
         <div>
-            Regis
+            Regisaaaa
         </div>
     )
 }
