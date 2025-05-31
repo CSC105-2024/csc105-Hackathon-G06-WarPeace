@@ -1,7 +1,7 @@
 import { db } from "../index.ts";
 import {hash, compare} from 'bcrypt';
 export const createUser = async (username:string , password:string)=>{
-    const hashedPassword = await hash(password,10);
+    const hashedPassword = await hash(password,8);
     return db.user.create({
         data:{
             username,
@@ -26,10 +26,11 @@ export const updateUserProfile = async (
     userId:number,
     newPassword:string,
 )=>{
+    const hashedPassword = await hash(newPassword, 8);
     return db.user.update({
         where: {id:userId},
         data:{
-            password:newPassword,
+            password:hashedPassword,
         }
     })
 }

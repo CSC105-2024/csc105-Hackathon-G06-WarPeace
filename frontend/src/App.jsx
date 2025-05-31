@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Login from './pages/login'
 import SignUp from './pages/register'
 import HomePage from './pages/HomePage';
-import AddPost from "./pages/Addpost";
+import AddPost from "./pages/addPost";
 import TopicPage from './pages/TopicPage'; 
 import TestLogin from "./pages/login_test"
 import RegisterTest from "./pages/register_test"
