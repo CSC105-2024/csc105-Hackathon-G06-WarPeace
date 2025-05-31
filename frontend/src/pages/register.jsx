@@ -53,7 +53,7 @@ function SignUp() {
                             className="text-white bg-black rounded-[3px] p-3 py-1.5"
                         />
                         {errors.username && (
-                            <p className="text-red-500 text-sm mt-1">{errors.username.message}</p>
+                            <p className="text-red-400 text-sm mt-1">{errors.username.message}</p>
                         )}
                     </div>
 
@@ -66,7 +66,7 @@ function SignUp() {
                             className="text-white bg-black rounded-[3px] p-3 py-1.5"
                         />
                         {errors.password && (
-                            <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>
+                            <p className="text-red-400  text-sm mt-1">{errors.password.message}</p>
                         )}
                     </div>
 
@@ -79,7 +79,7 @@ function SignUp() {
                             className="text-white bg-black rounded-[3px] p-3 py-1.5"
                         />
                         {errors.confirmPassword && (
-                            <p className="text-red-500 text-sm mt-1">{errors.confirmPassword.message}</p>
+                            <p className="text-red-400  text-sm mt-1">{errors.confirmPassword.message}</p>
                         )}
                     </div>
 
