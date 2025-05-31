@@ -54,7 +54,7 @@ function Test() {
           return (
             <div key={index} className="p-5 border-1 m-2">
               {post.text}
-              <br />
+              <br/>
               {post.createdAt}
             </div>
           );
