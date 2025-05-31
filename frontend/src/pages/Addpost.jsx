@@ -175,14 +175,14 @@ const AddPost = () => {
       </div>
 
       {toast.visible && (
-        <div className={`toast ${toast.type} show text-white`}>
+        <div className={`toast ${toast.type} show text-white `}>
           {toast.message}
         </div>
       )}
 
-      <div className="button-box flex gap-5 ">
+      <div className="button-box flex gap-5 mt-3 ">
         <button className="bg-[#D9D9D9] py-5 px-7 rounded-sm font-bold ">
-          CANCLE
+          CANCEL
         </button>
         <button onClick={handlePost} className="bg-[#FEC232] py-5 px-7 rounded-sm font-bold ">
           POST

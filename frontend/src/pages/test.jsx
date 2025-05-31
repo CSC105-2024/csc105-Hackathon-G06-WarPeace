@@ -49,6 +49,7 @@ function Test() {
       <div className="myPost">
         <h1 className="p-2 text-4xl">Profile</h1>
         <p>{username}</p>
+        
         <h1 className="p-2 text-2xl">My post</h1>
         {mypost.map((post, index) => {
           return (

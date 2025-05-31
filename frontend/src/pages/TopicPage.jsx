@@ -74,7 +74,13 @@ const TopicPage = () => {
   const handleNext = () => {
     if (currentPage < totalPages) setCurrentPage(currentPage + 1);
   };
-
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleString("en-US", {
+      dateStyle: "medium",
+      timeStyle: "short",
+    });
+  };
   return (
     <>
       <Navbar />
@@ -88,7 +94,7 @@ const TopicPage = () => {
             <PostCard
               key={post.id}
               content={post.text}
-              date={post.createdAt}
+              date={formatDate(post.createdAt)}
               comments={post.comments || []}
             />
           ))}

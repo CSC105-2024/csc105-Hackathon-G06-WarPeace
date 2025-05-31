@@ -21,8 +21,7 @@ function App() {
         <Route path="/topic/:category" element={<TopicPage />} />
         <Route path="/signUpTest" element={<RegisterTest />} />
         <Route path="/addPost" element={<AddPost/>}/>
-        <Route path="/test" element={<Test/>}/>
-        
+        <Route path="/test" element={<Test/>}/>        
         <Route path="/myProfile" element={<MyProfile />} />
       </Routes>
     </BrowserRouter>

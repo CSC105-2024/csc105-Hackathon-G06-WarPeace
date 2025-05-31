@@ -28,3 +28,7 @@ serve({
 app.route("/cookies", cookiesRouter);
 app.route("/auth", authRouter);
 app.route("/post", postRouter);
+
+process.on('beforeExit', async () => {
+  await db.$disconnect()
+})

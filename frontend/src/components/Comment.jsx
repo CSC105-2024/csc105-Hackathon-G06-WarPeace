@@ -1,27 +1,35 @@
 // Comment
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const Comment = ({ existingComments = [], onAddComment }) => {
-  const [originalText, setOriginalText] = useState('');
-  const [filteredText, setFilteredText] = useState('');
+  const [originalText, setOriginalText] = useState("");
+  const [filteredText, setFilteredText] = useState("");
   const [comments, setComments] = useState(existingComments);
   const [loading, setLoading] = useState(false);
-
+  const comment = [
+    {
+      text: "swwsswww",
+      date: "swswsw",
+    },
+    {
+      text: "swwsswww",
+      date: "swswsw",
+    },
+  ];
   const handlePeacefully = async () => {
     if (!originalText.trim()) return;
     setLoading(true);
 
-//แล้วแต่ว่าจะเอามั้ย
-//     const handlePeacefully = async () => {
-//   if (!originalText.trim()) return;
-//   setLoading(true);
+    //แล้วแต่ว่าจะเอามั้ย
+    //     const handlePeacefully = async () => {
+    //   if (!originalText.trim()) return;
+    //   setLoading(true);
 
-//   const response = await fakeGeminiFilter(originalText);
-//   setFilteredText(response);
+    //   const response = await fakeGeminiFilter(originalText);
+    //   setFilteredText(response);
 
-//   setLoading(false);
-// };
-
+    //   setLoading(false);
+    // };
   };
 
   const handlePost = () => {
@@ -33,8 +41,8 @@ const Comment = ({ existingComments = [], onAddComment }) => {
     };
     setComments([...comments, newComment]);
     onAddComment && onAddComment(newComment);
-    setOriginalText('');
-    setFilteredText('');
+    setOriginalText("");
+    setFilteredText("");
   };
 
   return (
@@ -54,7 +62,7 @@ const Comment = ({ existingComments = [], onAddComment }) => {
               className="bg-red-600 px-4 py-1 rounded text-white text-sm"
               onClick={handlePeacefully}
             >
-              {loading ? 'Filtering...' : 'Peacefully'}
+              {loading ? "Filtering..." : "Peacefully"}
             </button>
           </div>
         </div>
@@ -78,12 +86,12 @@ const Comment = ({ existingComments = [], onAddComment }) => {
         )}
       </div>
 
-      {comments.length > 0 && (
+      {comment.length > 0 && (
         <div className="space-y-3">
-          {comments.map((c, idx) => (
+          {comment.map((c, idx) => (
             <div
               key={idx}
-              className="bg-[#2D3138] p-3 rounded text-gray-100 text-sm border border-gray-700"
+              className="bg-[#1E2023] p-3 rounded text-gray-100 text-sm border border-gray-700"
             >
               <p className="mb-1">{c.text}</p>
               <p className="text-xs text-gray-400 text-right">{c.date}</p>
@@ -100,10 +108,8 @@ export default Comment;
 const fakeGeminiFilter = async (text) => {
   return new Promise((resolve) => {
     setTimeout(() => {
-
-      const cleaned = text.replace(/fuck|shit|bitch/gi, '[สุภาพ]');
+      const cleaned = text.replace(/fuck|shit|bitch/gi, "[สุภาพ]");
       resolve(cleaned);
     }, 1000);
   });
 };
-

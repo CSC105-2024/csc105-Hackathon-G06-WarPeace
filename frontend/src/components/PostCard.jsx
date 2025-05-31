@@ -18,13 +18,13 @@ const PostCard = ({ content, date, comments: initialComments = [] }) => {
 
         <div className="text-xs text-gray-400 flex justify-end items-center space-x-4">
           <span>{date}</span>
-
           <button
             onClick={() => setShowComment((prev) => !prev)}
             className="hover:text-white flex items-center space-x-1"
           >
-            <span>{comments.length}</span>
+            <img className="w-4" src="/film_HomePage/comment.svg" />
           </button>
+          <span>{comments.length}</span>
         </div>
       </div>
 
