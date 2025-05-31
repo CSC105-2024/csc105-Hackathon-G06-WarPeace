@@ -13,13 +13,13 @@ function DeleteConfirm({ onCancel, onConfirm }) {
         <div className="flex justify-end space-x-4">
           <button
             onClick={onCancel}
-            className="bg-gray-600 hover:bg-gray-700 px-4 py-2 rounded-[3px]"
+            className="bg-[#F04E23] hover:bg-[#f03823] px-4 py-2 rounded-[3px]"
           >
             Cancel
           </button>
           <button
             onClick={onConfirm}
-            className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-[3px]"
+            className="bg-[#FEC232] hover:bg-[#fea232] px-4 py-2 rounded-[3px]"
           >
             Yes, Delete
           </button>

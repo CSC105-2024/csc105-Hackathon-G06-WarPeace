@@ -38,7 +38,7 @@ function UserProfile() {
             onCancel={() => setShowDeleteConfirm(false)}
             onConfirm={() => {
               setShowDeleteConfirm(false);
-              navigate("/login");
+              navigate("/");
             }}
           />
         )}
