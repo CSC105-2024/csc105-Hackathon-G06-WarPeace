@@ -100,7 +100,7 @@ function UserProfile() {
                       </span>
                       <button
                         onClick={handleEditClick}
-                        className="text-white hover:text-gray-300 px-2 py-1 h-[36px] flex items-center"
+                        className="text-white hover:text-gray-300 cursor-pointer px-2 py-1 h-[36px] flex items-center"
                       >
                         <img src={pencil} className="w-5 h-5  cursor-pointer" />
                       </button>

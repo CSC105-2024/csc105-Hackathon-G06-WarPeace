@@ -133,7 +133,7 @@ function SignUp() {
             <div className="hidden md:flex md:w-1/2 lg:w-2/5 items-center justify-center p-8 box-border">
                 <img
                     src={bubblespeech}
-                    className="max-w-full h-auto md:scale-115 md:mr-5 lg:mr-24 xl:mr-28"
+                    className="max-w-full h-auto md:scale-115 opacity-65 md:mr-5 lg:mr-24 xl:mr-28"
                 />
             </div>
         </div>
