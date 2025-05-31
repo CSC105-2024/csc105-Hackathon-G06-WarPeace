@@ -1,9 +1,11 @@
 import { Hono } from "hono";
 import { getUserData, login, profileUpdate, signup, deleteAccount} from "../controllers/auth.controller.ts";
+import { authMiddleWare } from "../middleware/auth.middleware.ts";
 const authRouter = new Hono();
 authRouter.post('/signup', signup);
 authRouter.post('/login',login );
 authRouter.patch('/update-password', profileUpdate); 
 authRouter.get('/getUserData/:userId', getUserData); 
+authRouter.use('*', authMiddleWare);
 authRouter.delete('/deleteAccount',deleteAccount ); 
 export default authRouter;

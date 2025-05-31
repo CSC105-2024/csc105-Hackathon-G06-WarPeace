@@ -78,12 +78,23 @@ export const login = async (c: Context) => {
 };
 
 export const profileUpdate = async (c: Context) => {
-  const { password,userId } = await c.req.json<AuthBody>();
+  const { password, userId } = await c.req.json<AuthBody>();
+
   try {
+    const numericUserId = Number(userId);
+
+    if (isNaN(numericUserId)) {
+      return c.json(
+        { success: false, msg: "Invalid user ID." },
+        400
+      );
+    }
+
     const updatedUser = await authModel.updateUserProfile(
-      userId,
-      password,
+      numericUserId,
+      password
     );
+
     return c.json({
       success: true,
       msg: "Updated profile",
@@ -97,6 +108,7 @@ export const profileUpdate = async (c: Context) => {
     );
   }
 };
+
 
 export const getUserData = async (c:Context)=>{
   try{
@@ -123,27 +135,36 @@ export const getUserData = async (c:Context)=>{
   }
 }
 
-export const deleteAccount = async (c:Context)=>{
-  try{
+export const deleteAccount = async (c: Context) => {
+  try {
+    // Get userId from context (must be set by auth middleware)
     const userId = c.get("userId");
-    if(!userId){
+
+    if (!userId) {
       return c.json({ success: false, msg: "Unauthorized" }, 401);
     }
+
     await authModel.deleteUserAccount(Number(userId));
+
+
     c.header(
       "Set-Cookie",
-      "userId=; Path=/ HttpOnly; Max-Age=0"
-    )
+      "userId=; Path=/; HttpOnly; Max-Age=0"
+    );
+
     return c.json({
-      success:true,
-      msg:"Account deleted sucessfully"
-    })
-  }catch(e){
-    console.error(e);
-    return c.json({ success: false, msg: "Failed to delete account" }, 500);
+      success: true,
+      msg: "Account deleted successfully",
+    });
+  } catch (e) {
+    console.error("Delete account error:", e);
+    return c.json(
+      { success: false, msg: "Failed to delete account" },
+      500
+    );
   }
-  
-}
+};
+
 
 
 
