@@ -4,6 +4,7 @@ import SignUp from './pages/register'
 import { useState } from 'react';
 import HomePage from './pages/HomePage';
 import TopicPage from './pages/TopicPage'; 
+import AddPost from "./pages/Addpost";
 
 // import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
@@ -15,6 +16,7 @@ function App() {
         <Route path="/signUp" element={<SignUp />} />
         <Route path="/HomePage" element={<HomePage />} />
         <Route path="/topic/:category" element={<TopicPage />} />
+        <Route path="/addpost" element={<AddPost />} />
       </Routes>
     </BrowserRouter>
   )
