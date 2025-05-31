@@ -40,7 +40,7 @@ function NavBar() {
           onClick={handlePostClick}
           className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-3 md:px-4 py-1.5 md:py-2 rounded text-xs md:text-sm"
         >
-          <span className="md:inline hidden">+ POST</span>
+          <span className="md:inline hidden font-bold">+ POST</span>
           <span className="md:hidden">+</span>
         </button>
 
