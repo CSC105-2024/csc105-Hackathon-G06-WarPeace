@@ -95,7 +95,7 @@ const TopicPage = () => {
               key={post.id}
               content={post.text}
               date={formatDate(post.createdAt)}
-              postId = {post.id}
+              postId={post.id}
               comments={post.reply || []}
             />
           ))}
@@ -115,7 +115,10 @@ const TopicPage = () => {
                 currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""
               }`}
             >
-              <FontAwesomeIcon icon={faChevronLeft} />
+              <img
+                className="w-6 transform -scale-x-100"
+                src="/film_HomePage/rightarrow.svg"
+              />
             </button>
             <span className="text-sm">
               PAGE {currentPage} OF {totalPages}
@@ -129,7 +132,7 @@ const TopicPage = () => {
                   : ""
               }`}
             >
-              <FontAwesomeIcon icon={faChevronRight} />
+              <img className="w-6" src="/film_HomePage/rightarrow.svg" />
             </button>
           </div>
         )}
