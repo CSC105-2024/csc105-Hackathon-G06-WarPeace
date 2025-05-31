@@ -1,7 +1,7 @@
 //PostCard
-import React, { useState } from 'react';
-import { BiSolidCommentDetail } from 'react-icons/bi';
-import Comment from './Comment';
+import React, { useState } from "react";
+
+import Comment from "./Comment";
 
 const PostCard = ({ content, date, comments: initialComments = [] }) => {
   const [showComment, setShowComment] = useState(false);
@@ -23,7 +23,6 @@ const PostCard = ({ content, date, comments: initialComments = [] }) => {
             onClick={() => setShowComment((prev) => !prev)}
             className="hover:text-white flex items-center space-x-1"
           >
-            <BiSolidCommentDetail />
             <span>{comments.length}</span>
           </button>
         </div>
@@ -31,7 +30,10 @@ const PostCard = ({ content, date, comments: initialComments = [] }) => {
 
       {showComment && (
         <div className="mt-4 flex justify-end">
-          <Comment existingComments={comments} onAddComment={handleAddComment} />
+          <Comment
+            existingComments={comments}
+            onAddComment={handleAddComment}
+          />
         </div>
       )}
     </div>

@@ -27,7 +27,7 @@ function NavBar() {
         onClick={() => navigate("/homepage")}
       >
         <img
-          src="homepage/WARPEACE.png"
+          src="/homepage/WARPEACE_copy.png"
           alt="Logo"
           className="h-[60px] w-auto object-contain"
         />
