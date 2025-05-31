@@ -83,7 +83,7 @@ function Login() {
                 </form>
 
                 <p className="lg:text-lg mt-4 ">
-                    Don't have an account? <button onClick={() => nav("/signup")} className="underline font-bold cursor-pointer">Sign up</button>
+                    Don't have an account? <button onClick={() => nav("/register")} className="underline font-bold cursor-pointer">Sign up</button>
                 </p>
 
             </div>
