@@ -1,13 +1,17 @@
 import logo from "/login-regis/logo.svg";
 import { useNavigate } from "react-router-dom";
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { useState } from "react";
 function Login() {
     const nav = useNavigate();
+    const [showPassword, setShowPassword] = useState(false);
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+
     return (
         <div className="min-h-screen bg-[#2D3138] flex items-center justify-center px-4">
             <div className=" text-white p-8 rounded-md w-full max-w-md sm:max-w text-center 2xl:">
 
-                <img src={logo} className="text-shadow "/>
+                <img src={logo} className="text-shadow " />
                 <p className="text-lg lg:text-xl font-shadow font-bold text-[#F04E23] my-6">Say What You Mean—Respectfully</p>
                 <form className="space-y-4">
                     <div>
@@ -32,7 +36,7 @@ function Login() {
                     </button>
                 </form>
                 <p className="lg:text-lg mt-4 ">
-                    Don't have an account? <button onClick={()=>nav("/signUp")} className="underline font-bold cursor-pointer">Sign up</button>
+                    Don't have an account? <button onClick={() => nav("/signUp")} className="underline font-bold cursor-pointer">Sign up</button>
                 </p>
 
             </div>
