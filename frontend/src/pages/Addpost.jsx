@@ -72,35 +72,38 @@ const AddPost = () => {
     }
   };
   const handlePost = async () => {
-  const userId = Number(localStorage.getItem("userId"));
+    const userId = Number(localStorage.getItem("userId"));
 
-  if (!userId || !transformedText.trim() || !topic) {
-    showToast("Please make sure all fields are filled out.", "error");
-    return;
-  }
-
-  const postData = {
-    userId,
-    text: transformedText.trim(),
-    topic,
-  };
-
-  try {
-    const response = await axios.post("http://localhost:3000/post/addPost", postData, {withCredentials: true,} );
-    if (response.status === 200 || response.status === 201) {
-      showToast("Post submitted successfully!", "success");
-      setTopic("Politics");
-      setOriginalText("");
-      setTransformedText("");
-    } else {
-      throw new Error("Failed to submit the post.");
+    if (!userId || !transformedText.trim() || !topic) {
+      showToast("Please make sure all fields are filled out.", "error");
+      return;
     }
-  } catch (error) {
-    console.error("Error posting:", error);
-    showToast("Failed to post. Please try again.", "error");
-  }
-};
 
+    const postData = {
+      userId,
+      text: transformedText.trim(),
+      topic,
+    };
+
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/post/addPost",
+        postData,
+        { withCredentials: true }
+      );
+      if (response.status === 200 || response.status === 201) {
+        showToast("Post submitted successfully!", "success");
+        setTopic("Politics");
+        setOriginalText("");
+        setTransformedText("");
+      } else {
+        throw new Error("Failed to submit the post.");
+      }
+    } catch (error) {
+      console.error("Error posting:", error);
+      showToast("Failed to post. Please try again.", "error");
+    }
+  };
 
   return (
     <div className="min-h-screen flex bg-[#2D3138] flex-col items-center justify-center p-4 pt-8">
@@ -118,7 +121,7 @@ const AddPost = () => {
             onChange={(e) => {
               setTopic(e.target.value);
             }}
-            className="w-full m-3 md:w-1/2 border-1 bg-white rounded-[10px] px-2 py-2"
+            className="w-full md:m-3 md:w-1/2 border-1 bg-white rounded-[10px] px-2 py-2"
           >
             <option>Politics</option>
             <option>Academics</option>
@@ -184,7 +187,10 @@ const AddPost = () => {
         <button className="bg-[#D9D9D9] py-5 px-7 rounded-sm font-bold ">
           CANCEL
         </button>
-        <button onClick={handlePost} className="bg-[#FEC232] py-5 px-7 rounded-sm font-bold ">
+        <button
+          onClick={handlePost}
+          className="bg-[#FEC232] py-5 px-7 rounded-sm font-bold "
+        >
           POST
         </button>
       </div>

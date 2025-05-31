@@ -1,5 +1,7 @@
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 
 function NavBar() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -7,7 +9,7 @@ function NavBar() {
 
   const handleProfileClick = () => {
     setDropdownOpen(false);
-    navigate("/myProfile");
+    navigate('/myProfile');
   };
 
   const handleLogoutClick = () => {
@@ -53,7 +55,6 @@ function NavBar() {
               className="w-full h-full object-cover rounded-full"
             />
           </div>
-
           {dropdownOpen && (
             <div className="absolute right-0 top-full mt-2 w-28 md:w-32 bg-white text-black rounded shadow-lg z-50 text-sm">
               <div
@@ -76,4 +77,6 @@ function NavBar() {
   );
 }
 
+
 export default NavBar;
+
