@@ -13,6 +13,9 @@ const signUpSchema = z
       .min(6, "Password must be at least 6 characters")
       .regex(/\d/, "Password must contain at least one number"),
     confirmPassword: z.string(),
+    confirmAge: z.literal(true, {
+      errorMap: () => ({ message: "You must confirm your age" }),
+    }),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords do not match",
@@ -120,16 +123,21 @@ function SignUp() {
           </div>
 
           <div className="flex mt-5">
-            <input
-              type="checkbox"
-              className="accent-yellow-400 scale-125 mt-1 cursor-pointer"
-            />
-            <label className="text-white text-lg pl-4">
-              By creating an account,
-              <br />
-              I confirm I am at least 15 years old.
-            </label>
-          </div>
+          <input
+            type="checkbox"
+            {...register("confirmAge")}
+            className="accent-yellow-400 scale-125 mt-1 cursor-pointer"
+          />
+          <label className="text-white text-lg pl-4">
+            By creating an account,
+            <br />
+            I confirm I am at least 15 years old.
+          </label>
+        </div>
+        {errors.confirmAge && (
+          <p className="text-gray-300 text-sm mt-1">{errors.confirmAge.message}</p>
+        )}
+
 
           <div className="flex items-center justify-center">
             <button
