@@ -48,7 +48,7 @@ const Comment = ({ existingComments = [], onAddComment }) => {
   return (
     <div className="w-[90%] space-y-4 text-white">
       <div className="bg-[#1E2023] border border-gray-600 p-4 rounded space-y-4">
-        <div>
+        <div className="flex flex-col gap-5">
           <textarea
             className="w-full p-2 bg-gray-300 text-black rounded"
             rows={2}
@@ -56,34 +56,28 @@ const Comment = ({ existingComments = [], onAddComment }) => {
             value={originalText}
             onChange={(e) => setOriginalText(e.target.value)}
           />
-          <div className="flex justify-end mt-2">
+          <div className="flex justify-end ">
             <button
               disabled={loading}
-              className="bg-red-600 px-4 py-1 rounded text-white text-sm"
+              className="bg-[#F04E23] px-4 py-3 font-semibold  rounded text-white text-sm"
               onClick={handlePeacefully}
             >
-              {loading ? "Filtering..." : "Peacefully"}
+              Peacefully
+            </button>
+          </div>
+          <div className="w-full p-2 bg-gray-300 text-black rounded">
+            slspwls
+          </div>
+          <div className="flex justify-end ">
+            <button
+              disabled={loading}
+              className="bg-[#FEC232] text-black font-semibold px-7 py-3 rounded  text-sm"
+              onClick={handlePeacefully}
+            >
+              POST
             </button>
           </div>
         </div>
-        {filteredText && (
-          <div>
-            <textarea
-              className="w-full p-2 bg-yellow-100 text-black rounded"
-              rows={2}
-              value={filteredText}
-              readOnly
-            />
-            <div className="flex justify-end mt-2">
-              <button
-                className="bg-yellow-400 px-4 py-1 rounded text-black font-semibold text-sm"
-                onClick={handlePost}
-              >
-                Post
-              </button>
-            </div>
-          </div>
-        )}
       </div>
 
       {comment.length > 0 && (
