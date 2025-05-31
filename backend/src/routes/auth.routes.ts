@@ -3,7 +3,7 @@ import { getUserData, login, profileUpdate, signup, deleteAccount} from "../cont
 const authRouter = new Hono();
 authRouter.post('/signup', signup);
 authRouter.post('/login',login );
-authRouter.patch('/update-Username', profileUpdate);
-authRouter.get('/getUserData/:userId', getUserData);
-authRouter.delete('/deleteAccount',deleteAccount );
+authRouter.patch('/update-password', profileUpdate); 
+authRouter.get('/getUserData/:userId', getUserData); 
+authRouter.delete('/deleteAccount',deleteAccount ); 
 export default authRouter;
