@@ -22,7 +22,7 @@ const HomePage = () => {
       <NavBar />
 
       <div className="min-h-screen bg-[#2D3138] text-white flex flex-col items-center py-10 px-4">
-        <div className="bg-[#1E2023] w-full max-w-xl rounded px-6 py-4 mb-10 flex space-x-4 items-start shadow-md">
+        <div className="bg-[#1E2023] my-25 w-full max-w-xl rounded px-6 py-4 mb-10 flex space-x-4 items-start shadow-md">
           <div className="text-sm md:text-base">
             <p className="font-semibold">Rules of Use</p>
             <ul className="list-disc pl-5 mt-1 space-y-1 text-gray-200">

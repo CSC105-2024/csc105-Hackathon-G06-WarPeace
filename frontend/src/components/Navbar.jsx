@@ -23,7 +23,7 @@ function NavBar() {
   };
 
   return (
-    <div className="bg-[#24272D] text-white px-4 md:px-8 py-4 flex justify-between items-center relative shadow-md  top-0 z-50">
+    <div className="bg-[#24272D] fixed text-white px-4 md:px-8 py-4 flex justify-between items-center w-full shadow-md  top-0 z-50">
       <div
         className="flex items-center space-x-3 cursor-pointer"
         onClick={() => navigate("/homepage")}

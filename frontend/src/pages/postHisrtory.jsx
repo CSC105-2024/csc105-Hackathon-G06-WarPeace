@@ -31,7 +31,7 @@ const PostHistory = () => {
   return (
     <>
       <Navbar />
-      <div className="bg-[#2D3138]  min-h-screen text-white px-8 py-12">
+      <div className="bg-[#2D3138] pt-30  min-h-screen text-white px-8 py-12">
         <h1 className="text-3xl font-bold text-center mb-10">HISTORY POSTS</h1>
         {mypost.map((post, index) => (
           <div

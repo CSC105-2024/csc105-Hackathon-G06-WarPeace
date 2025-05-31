@@ -77,7 +77,7 @@ useEffect(() => {
             }}
           />
         )}
-        <div className="w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-3xl xl:max-w-2xl">
+        <div className="w-full mt-20 max-w-md sm:max-w-lg md:max-w-xl lg:max-w-3xl xl:max-w-2xl">
           <h1 className="text-white font-bold text-2xl lg:text-5xl mb-4">
             User Profile
           </h1>
