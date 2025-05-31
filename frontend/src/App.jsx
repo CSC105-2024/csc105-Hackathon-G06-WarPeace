@@ -5,18 +5,23 @@ import { useState } from 'react';
 import HomePage from './pages/HomePage';
 import TopicPage from './pages/TopicPage'; 
 import AddPost from "./pages/Addpost";
-
-// import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-
+import TestLogin from "./pages/login_test"
+import RegisterTest from "./pages/register_test"
+import AddPost from "./pages/addPost"
+import Test from "./pages/test"
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Login />} />
+        <Route path="/loginTest" element={<TestLogin/>} />
         <Route path="/signUp" element={<SignUp />} />
         <Route path="/HomePage" element={<HomePage />} />
         <Route path="/topic/:category" element={<TopicPage />} />
         <Route path="/addpost" element={<AddPost />} />
+        <Route path="/signUpTest" element={<RegisterTest />} />
+        <Route path="/addPost" element={<AddPost/>}/>
+        <Route path="/test" element={<Test/>}/>
       </Routes>
     </BrowserRouter>
   )
