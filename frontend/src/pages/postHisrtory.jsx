@@ -50,8 +50,9 @@ const PostHistory = () => {
       <div className="bg-[#2D3138] pt-30 min-h-screen text-white px-8 py-12">
         <div className="text-box text-center text-3xl px-20 mb-10 flex flex-row items-center gap-2">
           <Link to={"/myProfile"} className="text-gray-200 hover:underline">
-            User Profile /
+            User Profile
           </Link>
+          <div>/</div>
           <h1 className="font-bold">HISTORY POSTS</h1>
         </div>
 
